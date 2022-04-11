@@ -1,7 +1,6 @@
 package agario;
 
 import javafx.application.Application;
-import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
@@ -17,14 +16,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
         app = this;
         stage = primaryStage;
+
         stage.setTitle("Agario");
-        Game game = new Game();
+
+        camera = new PerspectiveCamera();
+        Game game = new Game(camera);
+        game.setManaged(false);
         Group root = new Group(game);
         Scene s = new Scene(root);
-        camera = new PerspectiveCamera();
         s.setCamera(camera);
+
         stage.setScene(s);
         stage.show();
     }
