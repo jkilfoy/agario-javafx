@@ -23,7 +23,7 @@ public class Main extends Application {
         Game game = new Game();
         Group root = new Group(game);
         Scene s = new Scene(root);
-        camera = new PerspectiveCamera(true);
+        camera = new PerspectiveCamera();
         s.setCamera(camera);
         stage.setScene(s);
         stage.show();

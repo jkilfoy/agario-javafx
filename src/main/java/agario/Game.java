@@ -4,6 +4,7 @@ package agario;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Game extends Canvas {
 
@@ -40,7 +41,8 @@ public class Game extends Canvas {
     }
 
     private void render() {
-
+        context.setFill(Color.BLACK);
+        context.fillText("Some text", 200, 200);
     }
 
 }
