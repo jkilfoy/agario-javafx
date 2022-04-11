@@ -2,32 +2,26 @@ package agario;
 
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class Main extends Application {
 
     public static Main app = null;
     public static Stage stage = null;
-    public static PerspectiveCamera camera = null;
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
 
         app = this;
         stage = primaryStage;
 
         stage.setTitle("Agario");
 
-        camera = new PerspectiveCamera();
-        Game game = new Game(camera);
+        Game game = new Game();
         game.setManaged(false);
         Group root = new Group(game);
         Scene s = new Scene(root);
-        s.setCamera(camera);
 
         stage.setScene(s);
         stage.show();

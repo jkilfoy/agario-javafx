@@ -6,19 +6,20 @@ import javafx.scene.paint.Color;
 public class PlayerCell extends Cell {
 
     Game game;
+    public double screenX, screenY;
     public double xVelocity, yVelocity;
 
     public PlayerCell(double centerX, double centerY, double radius, Color color, Game game) {
-        super(centerX, centerY, radius, color);
+        super(centerX, centerY, radius, color, game);
         this.game = game;
+        screenX = Game.WINDOW_WIDTH / 2f - radius;
+        screenY = Game.WINDOW_HEIGHT / 2f - radius;
     }
 
     @Override
     void update() {
         setCenterX(getCenterX() + xVelocity);
-        game.camera.setTranslateX(game.camera.getTranslateX() + xVelocity);
         setCenterY(getCenterY() + yVelocity);
-        game.camera.setTranslateY(game.camera.getTranslateY() + yVelocity);
     }
 
 }

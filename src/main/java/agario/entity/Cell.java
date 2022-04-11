@@ -1,14 +1,17 @@
 package agario.entity;
 
+import agario.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public abstract class Cell extends javafx.scene.shape.Circle {
 
     private final Color color;
+    private final Game game;
 
-    public Cell(double centerX, double centerY, double radius, Color color) {
+    public Cell(double centerX, double centerY, double radius, Color color, Game game) {
         super(centerX, centerY, radius);
+        this.game = game;
         this.color = color;
     }
 
@@ -21,7 +24,7 @@ public abstract class Cell extends javafx.scene.shape.Circle {
 
     public void render(GraphicsContext gc) {
         gc.setFill(color);
-        gc.fillOval(getCenterX() - getRadius(), getCenterY() - getRadius(),
+        gc.fillOval(game.convertToScreenX(getCenterX() - getRadius()), game.convertToScreenY(getCenterY() - getRadius()),
                 getRadius() * 2, getRadius() * 2);
     }
 

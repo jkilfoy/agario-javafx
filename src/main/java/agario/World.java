@@ -6,10 +6,12 @@ import javafx.scene.shape.Line;
 
 public class World {
 
+    private final Game game;
     Line[] horizontalLines = new Line[Game.WORLD_SIZE / 500 + 1];
     Line[] verticalLines = new Line[Game.WORLD_SIZE / 500 + 1];
 
-    public World() {
+    public World(Game game) {
+        this.game = game;
         for (int i = 0; i < horizontalLines.length; i++) {
             horizontalLines[i] = new Line(0, i * (Game.WORLD_SIZE / 500f), Game.WORLD_SIZE,
                     i * (Game.WORLD_SIZE / 500f));
@@ -24,9 +26,11 @@ public class World {
         Line line;
         for (int i = 0; i < horizontalLines.length; i++) {
             line = horizontalLines[i];
-            gc.strokeLine(line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
+            gc.strokeLine(game.convertToScreenX(line.getStartX()), game.convertToScreenY(line.getStartY()),
+                    game.convertToScreenX(line.getEndX()), game.convertToScreenY(line.getEndY()));
             line = verticalLines[i];
-            gc.strokeLine(line.getStartX(), line.getStartY(), line.getEndX(), line.getEndY());
+            gc.strokeLine(game.convertToScreenX(line.getStartX()), game.convertToScreenY(line.getStartY()),
+                    game.convertToScreenX(line.getEndX()), game.convertToScreenY(line.getEndY()));
         }
     }
 

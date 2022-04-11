@@ -19,11 +19,8 @@ public class PlayerInput implements EventHandler<MouseEvent> {
         mouseY = mouseEvent.getY();
 
         // find distance from player
-        double playerX = game.test.getCenterX() - game.camera.getLayoutX();
-        double playerY = game.test.getCenterY() - game.camera.getLayoutY();
-
-        double deltaX = mouseX - playerX;
-        double deltaY = mouseY - playerY;
+        double deltaX = mouseX - game.test.screenX;
+        double deltaY = mouseY - game.test.screenY;
 
         game.test.xVelocity = deltaX * 0.05;
         game.test.yVelocity = deltaY * 0.05;

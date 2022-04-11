@@ -5,7 +5,6 @@ import agario.entity.EntityHandler;
 import agario.entity.PlayerCell;
 import agario.input.PlayerInput;
 import javafx.animation.AnimationTimer;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
@@ -16,19 +15,16 @@ public class Game extends Canvas {
     public static final int WORLD_SIZE = 50000;
     public static final int WINDOW_WIDTH = 1200;
     public static final int WINDOW_HEIGHT = 700;
-    public static final int BORDER_SIZE = 16;
 
     GraphicsContext context = getGraphicsContext2D();
-    public PerspectiveCamera camera;
 
-    World world = new World();
+    World world = new World(this);
     EntityHandler entities = new EntityHandler();
     PlayerInput input = new PlayerInput(this);
     public PlayerCell test = new PlayerCell(100, 100, 50, Color.INDIGO, this);
 
-    public Game(PerspectiveCamera camera) {
+    public Game() {
         super(WINDOW_WIDTH, WINDOW_HEIGHT);
-        this.camera = camera;
 
         // TODO add event handlers
         addEventHandler(MouseEvent.MOUSE_MOVED, input);
@@ -63,7 +59,17 @@ public class Game extends Canvas {
     }
 
     private void clear() {
-        context.clearRect(0, 0, WORLD_SIZE, WORLD_SIZE);
+        context.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    }
+
+    public double convertToScreenX(double worldX) {
+        return worldX - test.getCenterX()
+                + test.screenX;
+    }
+
+    public double convertToScreenY(double worldY) {
+        return worldY - test.getCenterY()
+                + test.screenY;
     }
 
 }
