@@ -3,10 +3,12 @@ package agario;
 
 import agario.entity.EntityHandler;
 import agario.entity.PlayerCell;
+import agario.input.PlayerInput;
 import javafx.animation.AnimationTimer;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class Game extends Canvas {
@@ -17,18 +19,21 @@ public class Game extends Canvas {
     public static final int BORDER_SIZE = 16;
 
     GraphicsContext context = getGraphicsContext2D();
-    PerspectiveCamera camera;
+    public PerspectiveCamera camera;
 
     World world = new World();
     EntityHandler entities = new EntityHandler();
-    PlayerCell test = new PlayerCell(100, 100, 50, Color.INDIGO);
+    PlayerInput input = new PlayerInput(this);
+    public PlayerCell test = new PlayerCell(100, 100, 50, Color.INDIGO, this);
 
     public Game(PerspectiveCamera camera) {
         super(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.camera = camera;
 
         // TODO add event handlers
+        addEventHandler(MouseEvent.MOUSE_MOVED, input);
         setFocusTraversable(true);
+        requestFocus();
 
         entities.cells.add(test);
 
@@ -42,6 +47,7 @@ public class Game extends Canvas {
             public void handle(long l) {
                 //input - handled by event loop
                 update();
+                clear();
                 render();
             }
         }.start();
@@ -54,6 +60,10 @@ public class Game extends Canvas {
     private void render() {
         world.render(context);
         entities.render(context);
+    }
+
+    private void clear() {
+        context.clearRect(0, 0, WORLD_SIZE, WORLD_SIZE);
     }
 
 }
