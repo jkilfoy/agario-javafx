@@ -1,8 +1,7 @@
-module agario.agario {
+module agario {
     requires javafx.controls;
     requires javafx.fxml;
 
-
-    opens agario.agario to javafx.fxml;
-    exports agario.agario;
+    exports agario;
+    opens agario to javafx.fxml;
 }
