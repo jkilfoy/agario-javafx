@@ -5,6 +5,7 @@ import agario.entity.EntityHandler;
 import agario.entity.PlayerCell;
 import agario.input.PlayerInput;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
@@ -15,11 +16,12 @@ public class Game extends Canvas {
     public static final int WORLD_SIZE = 50000;
     public static final int WINDOW_WIDTH = 1200;
     public static final int WINDOW_HEIGHT = 700;
+    public static Rectangle2D bounds = new Rectangle2D(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     GraphicsContext context = getGraphicsContext2D();
 
     World world = new World(this);
-    EntityHandler entities = new EntityHandler();
+    EntityHandler entities = new EntityHandler(this);
     PlayerInput input = new PlayerInput(this);
     public PlayerCell test = new PlayerCell(100, 100, 50, Color.INDIGO, this);
 
@@ -72,4 +74,7 @@ public class Game extends Canvas {
                 + test.screenY;
     }
 
+    public static double clamp(double val, double min, double max) {
+        return Math.max(min, Math.min(max, val));
+    }
 }

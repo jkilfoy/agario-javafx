@@ -7,15 +7,16 @@ import javafx.scene.shape.Line;
 public class World {
 
     private final Game game;
-    Line[] horizontalLines = new Line[Game.WORLD_SIZE / 500 + 1];
-    Line[] verticalLines = new Line[Game.WORLD_SIZE / 500 + 1];
+    private final float numLines = 1000f;
+    Line[] horizontalLines = new Line[(int) (numLines + 1)];
+    Line[] verticalLines = new Line[(int) (numLines + 1)];
 
     public World(Game game) {
         this.game = game;
         for (int i = 0; i < horizontalLines.length; i++) {
-            horizontalLines[i] = new Line(0, i * (Game.WORLD_SIZE / 500f), Game.WORLD_SIZE,
-                    i * (Game.WORLD_SIZE / 500f));
-            verticalLines[i] = new Line(i * (Game.WORLD_SIZE / 500f), 0, i * (Game.WORLD_SIZE / 500f),
+            horizontalLines[i] = new Line(0, i * (Game.WORLD_SIZE / numLines), Game.WORLD_SIZE,
+                    i * (Game.WORLD_SIZE / numLines));
+            verticalLines[i] = new Line(i * (Game.WORLD_SIZE / numLines), 0, i * (Game.WORLD_SIZE / numLines),
                     Game.WORLD_SIZE);
         }
 

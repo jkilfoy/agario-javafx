@@ -22,7 +22,7 @@ public class PlayerInput implements EventHandler<MouseEvent> {
         double deltaX = mouseX - game.test.screenX;
         double deltaY = mouseY - game.test.screenY;
 
-        game.test.xVelocity = deltaX * 0.05;
-        game.test.yVelocity = deltaY * 0.05;
+        game.test.xVelocity = deltaX * 0.025;
+        game.test.yVelocity = deltaY * 0.025;
     }
 }

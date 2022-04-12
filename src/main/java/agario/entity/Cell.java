@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 
 public abstract class Cell extends javafx.scene.shape.Circle {
 
-    private final Color color;
-    private final Game game;
+    protected final Color color;
+    protected final Game game;
 
     public Cell(double centerX, double centerY, double radius, Color color, Game game) {
         super(centerX, centerY, radius);

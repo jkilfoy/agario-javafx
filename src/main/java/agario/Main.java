@@ -19,7 +19,6 @@ public class Main extends Application {
         stage.setTitle("Agario");
 
         Game game = new Game();
-        game.setManaged(false);
         Group root = new Group(game);
         Scene s = new Scene(root);
 
