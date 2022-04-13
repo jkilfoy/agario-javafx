@@ -1,8 +1,8 @@
 package agario;
 
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,7 +19,7 @@ public class Main extends Application {
         stage.setTitle("Agario");
 
         Game game = new Game();
-        Group root = new Group(game);
+        Pane root = new Pane(game);
         Scene s = new Scene(root);
 
         stage.setScene(s);

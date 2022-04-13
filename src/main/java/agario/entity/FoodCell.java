@@ -18,7 +18,7 @@ public class FoodCell extends Cell {
         // d = sqrt((x - x)^2 + (y - y)^2)
         distance = Math.abs(Math.sqrt((Math.pow(getCenterX() - game.test.getCenterX(), 2))
                 + (Math.pow(getCenterY() - game.test.getCenterY(), 2))));
-        visible = distance <= Game.WINDOW_WIDTH / 2f + getRadius() * 2;
+        visible = distance <= Game.maxDist;
     }
 
     @Override

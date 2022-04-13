@@ -29,12 +29,6 @@ public final class EntityHandler {
         }
         for (Cell cell : cells) {
             cell.render(gc);
-            gc.setStroke(Color.BLACK);
-            gc.setLineWidth(0.5f);
-            for (FoodCell food : visibleFood) {
-                gc.strokeLine(game.convertToScreenX(food.getCenterX()), game.convertToScreenY(food.getCenterY()),
-                        game.convertToScreenX(cell.getCenterX()), game.convertToScreenY(cell.getCenterY()));
-            }
         }
     }
 
@@ -62,7 +56,7 @@ public final class EntityHandler {
                 if (cell.intersects(current)) {
                     it.remove();
                     foods.remove(current);
-                    cell.setRadius(cell.getRadius() + 0.2f);
+                    cell.increaseMass();
                 }
             }
         }

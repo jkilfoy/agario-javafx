@@ -12,8 +12,8 @@ public class PlayerCell extends Cell {
     public PlayerCell(double centerX, double centerY, double radius, Color color, Game game) {
         super(centerX, centerY, radius, color, game);
         this.game = game;
-        screenX = Game.WINDOW_WIDTH / 2f;
-        screenY = Game.WINDOW_HEIGHT / 2f;
+        screenX = (Game.WINDOW_WIDTH / 2f);
+        screenY = (Game.WINDOW_HEIGHT / 2f);
     }
 
     @Override

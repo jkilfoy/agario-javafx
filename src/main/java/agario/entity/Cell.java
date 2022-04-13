@@ -15,6 +15,10 @@ public abstract class Cell extends javafx.scene.shape.Circle {
         this.color = color;
     }
 
+    private double getArea() {
+        return Math.PI * Math.pow(getRadius(), 2);
+    }
+
     public boolean intersects(Cell other) {
         return Math.sqrt(
                   Math.pow(this.getCenterX() - other.getCenterX(), 2)
@@ -29,4 +33,10 @@ public abstract class Cell extends javafx.scene.shape.Circle {
     }
 
     abstract void update();
+
+    public void increaseMass() {
+        double or = getRadius();
+        setRadius(getRadius() + 1);
+        game.rescale(Math.sqrt(or / getRadius()));
+    }
 }

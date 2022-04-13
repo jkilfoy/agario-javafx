@@ -15,6 +15,10 @@ public class PlayerInput implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent mouseEvent) {
+        if (mouseEvent.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
+            System.out.println(mouseEvent.getX() + ", " + mouseEvent.getY());
+            return;
+        }
         mouseX = mouseEvent.getX();
         mouseY = mouseEvent.getY();
 

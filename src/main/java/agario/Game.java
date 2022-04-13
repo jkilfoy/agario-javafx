@@ -5,18 +5,20 @@ import agario.entity.EntityHandler;
 import agario.entity.PlayerCell;
 import agario.input.PlayerInput;
 import javafx.animation.AnimationTimer;
-import javafx.geometry.Rectangle2D;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Affine;
 
 public class Game extends Canvas {
 
     public static final int WORLD_SIZE = 50000;
     public static final int WINDOW_WIDTH = 1200;
     public static final int WINDOW_HEIGHT = 700;
-    public static Rectangle2D bounds = new Rectangle2D(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    public static double scale = 0.5f;
+    public static double maxDist = Math.sqrt(Math.pow(WINDOW_WIDTH / 2f, 2) + Math.pow(WINDOW_HEIGHT / 2f, 2)) / scale;
 
     GraphicsContext context = getGraphicsContext2D();
 
@@ -27,16 +29,26 @@ public class Game extends Canvas {
 
     public Game() {
         super(WINDOW_WIDTH, WINDOW_HEIGHT);
+        Affine a = context.getTransform();
+        a.appendScale(scale,scale,new Point2D(test.screenX, test.screenY));
+        context.setTransform(a);
 
         // TODO add event handlers
-        addEventHandler(MouseEvent.MOUSE_MOVED, input);
+        addEventHandler(MouseEvent.ANY, input);
         setFocusTraversable(true);
         requestFocus();
 
         entities.cells.add(test);
-
         // run the game
         run();
+    }
+
+    public void rescale(double scale) {
+        Game.scale *= scale;
+        maxDist = Math.sqrt(Math.pow(WINDOW_WIDTH / 2f, 2) + Math.pow(WINDOW_HEIGHT / 2f, 2)) / Game.scale;
+        Affine a = context.getTransform();
+        a.appendScale(scale, scale, test.screenX, test.screenY);
+        context.setTransform(a);
     }
 
     private void run() {
@@ -61,7 +73,7 @@ public class Game extends Canvas {
     }
 
     private void clear() {
-        context.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        context.clearRect(-WORLD_SIZE / 2f, -WORLD_SIZE / 2f, WORLD_SIZE, WORLD_SIZE); //TODO find more accurate method parameters
     }
 
     public double convertToScreenX(double worldX) {
